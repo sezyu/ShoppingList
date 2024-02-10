@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showList(list: List<ShopItem>){
+        //Реализация списков через LinearLayout
         llShopList.removeAllViews()
         for (shopItem in list){
             val layoutId = if (shopItem.isActive){
