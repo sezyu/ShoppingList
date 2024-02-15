@@ -33,6 +33,8 @@ class ShopItemFragment(
 
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +73,7 @@ class ShopItemFragment(
             tilName.error = message
         }
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner){
-            finish()
+            activity?.onBackPressed()
         }
     }
 
@@ -157,6 +159,13 @@ class ShopItemFragment(
         private const val MODE_EDIT = "extra_edit"
         private const val MODE_ADD = "extra_add"
         private const val MODE_UNKNOWN = ""
+
+        fun newInstanceAddItem(): ShopItemFragment{
+            return ShopItemFragment(MODE_ADD)
+        }
+        fun newInstanceEditItem(shopItemId: Int): ShopItemFragment {
+            return ShopItemFragment(MODE_EDIT, shopItemId)
+        }
 
         fun newIntentAddItem(context: Context): Intent {
             val intent = Intent(context,ShopItemActivity::class.java)
