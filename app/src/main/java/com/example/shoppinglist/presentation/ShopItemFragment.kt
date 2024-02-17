@@ -1,5 +1,6 @@
 package com.example.shoppinglist.presentation
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,12 +29,20 @@ class ShopItemFragment() : Fragment() {
     private lateinit var buttonSave: Button
 
 
+    private lateinit var onEditingFinishedListener: OnEditingFinishedListener
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnEditingFinishedListener){
+            onEditingFinishedListener = context
+        } else {
+            throw RuntimeException("Activity must implement OnEditingFinishedListener")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("ShopItemFragment", "onCreate" )
         super.onCreate(savedInstanceState)
         parseParams()
     }
@@ -74,7 +83,7 @@ class ShopItemFragment() : Fragment() {
             tilName.error = message
         }
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-            activity?.onBackPressed()
+            onEditingFinishedListener.onEditingFinished()
         }
     }
 
@@ -160,6 +169,11 @@ class ShopItemFragment() : Fragment() {
         etCount = view.findViewById(R.id.et_count)
         buttonSave = view.findViewById(R.id.button_save)
 
+    }
+
+    interface OnEditingFinishedListener{
+
+        fun onEditingFinished()
     }
 
     companion object {
