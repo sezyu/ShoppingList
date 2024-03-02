@@ -2,10 +2,9 @@ package com.example.shoppinglist.presentation
 
 import android.view.View
 import android.widget.TextView
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.shoppinglist.R
+import com.example.shoppinglist.databinding.ItemShopDisabledBinding
 
-class ShopItemViewHolder(view: View): ViewHolder(view) {
-    val tvName = view.findViewById<TextView>(R.id.tv_name)
-    val tvCount = view.findViewById<TextView>(R.id.tv_count)
-}
+class ShopItemViewHolder(val binding: ViewDataBinding): ViewHolder(binding.root)

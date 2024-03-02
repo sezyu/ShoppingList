@@ -34,6 +34,7 @@ class ShopItemFragment() : Fragment() {
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
     override fun onAttach(context: Context) {
+        Log.d("ShopItemFragment", "onAttach")
         super.onAttach(context)
         if (context is OnEditingFinishedListener){
             onEditingFinishedListener = context
@@ -43,6 +44,7 @@ class ShopItemFragment() : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("ShopItemFragment", "onCreate")
         super.onCreate(savedInstanceState)
         parseParams()
     }
@@ -52,10 +54,12 @@ class ShopItemFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("ShopItemFragment", "onCreateView")
         return inflater.inflate(R.layout.fragment_shop_item, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("ShopItemFragment", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
         initViews(view)
