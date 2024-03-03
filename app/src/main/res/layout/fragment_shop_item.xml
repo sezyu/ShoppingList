@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.shoppinglist.presentation.ShopItemViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,6 +21,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:layout_height="wrap_content"
+        app:errorInputName="@{viewModel.errorInputName}"
         app:layout_constraintBottom_toTopOf="@+id/til_count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +32,7 @@
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.shopItem.name}"
             android:hint="@string/name"
             android:inputType="textCapWords"/>
 
@@ -35,6 +45,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
 
+        app:errorInputCount="@{viewModel.errorInputCount}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +56,7 @@
             android:id="@+id/et_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewModel.shopItem.count)}"
             android:hint="@string/count"
             android:inputType="number" />
 
@@ -61,4 +73,5 @@
         android:textColor="@color/white"
         android:text="@string/save"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
